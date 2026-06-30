@@ -24,7 +24,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/students")
 public class StudentRestController {
     private List<Student> students;
 
@@ -70,11 +70,11 @@ public class StudentRestController {
         return students.get(studentId);
     }
 
-    @PostMapping("/students")
+    @PostMapping
     public ResponseEntity<StudentDto> createStudent(
             @Valid @RequestBody StudentDto studentDto) {
         StudentDto savedStudentDto = studentService.createStudent(studentDto);
-        return new ResponseEntity<>(savedStudentDto, HttpStatus.CREATED);
+        return new ResponseEntity<StudentDto>(savedStudentDto, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

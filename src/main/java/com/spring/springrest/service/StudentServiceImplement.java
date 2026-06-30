@@ -24,7 +24,7 @@ public class StudentServiceImplement implements StudentService {
     }
 
     @Override
-    @Transactional
+    //@Transactional
     public StudentDto createStudent(StudentDto studentDto) {
         // TODO Auto-generated method stub
         Student student = StudentMapper.toStudentEntity(studentDto);

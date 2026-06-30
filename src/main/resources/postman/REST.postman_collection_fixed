@@ -93,7 +93,7 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8080/api/students/5",
+          "raw": "http://localhost:8080/api/students/1",
           "protocol": "http",
           "host": [
             "localhost"
@@ -102,7 +102,7 @@
           "path": [
             "api",
             "students",
-            "5"
+            "1"
           ]
         }
       },
@@ -115,17 +115,23 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n    \"firstName\" : \"Edrian\",\r\n    \"lastName\" : \"Mendoza\",\r\n    \"email\" : \"email@example.com\"\r\n}"
+          "raw": "{\r\n  \"firstName\": \"Heart\",\r\n  \"lastName\": \"Fuentes\",\r\n  \"email\": \"heart@gmail.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
         },
         "url": {
-          "raw": "http://localhost:8080/api",
+          "raw": "http://localhost:8080/api/students",
           "protocol": "http",
           "host": [
             "localhost"
           ],
           "port": "8080",
           "path": [
-            "api"
+            "api",
+            "students"
           ]
         }
       },
@@ -228,6 +234,23 @@
             "students",
             "0"
           ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "InvalidInput",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"firstName\" : \"\",\r\n    \"lastName\" : \"Mendoza\",\r\n    \"email\" : \"email@example.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
         }
       },
       "response": []
