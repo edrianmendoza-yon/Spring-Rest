@@ -109,6 +109,27 @@
       "response": []
     },
     {
+      "name": "InvalidGetStudent",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/students/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "students",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "CreateStudent",
       "request": {
         "method": "POST",
