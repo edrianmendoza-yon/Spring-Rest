@@ -1,6 +1,8 @@
 package com.spring.springrest.controller;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,9 @@ import com.spring.springrest.entity.AuthRole;
 import com.spring.springrest.entity.AuthUser;
 import com.spring.springrest.repository.AuthRoleRepository;
 import com.spring.springrest.repository.AuthUserRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -94,5 +99,37 @@ public class AuthenticationController {
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         
         return new ResponseEntity<>("Login successful." , HttpStatus.OK);
+    }
+    
+    @PostMapping("/auth_login_session")
+    public ResponseEntity<?> loginWithSession(
+            @RequestBody AuthLoginDto authLoginDto,
+            HttpServletRequest request) {
+        // Implement login logic here
+        // You can use the authenticationManager to authenticate the user
+        // and return a JWT token or any other response as needed.
+        // return new ResponseEntity<>("Login successful", HttpStatus.OK);
+        Authentication authenticate = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(
+                        authLoginDto.getUsername(),
+                        authLoginDto.getPassword()));
+        
+        SecurityContextHolder.getContext().setAuthentication(authenticate);
+        HttpSession session = request.getSession(true);
+        session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+        
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Login successful with session.");
+        return ResponseEntity.ok(response);
+    }
+    
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        SecurityContextHolder.clearContext();
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Logout successful.");
     }
 }
